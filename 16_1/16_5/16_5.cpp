@@ -19,19 +19,11 @@ using namespace std;
 
 int powerOf5(int n) {
 	int power = 0;
-	int powerOf5 = 5;
-	while (n >= powerOf5) {
+	while ((n % 5) == 0) {
+		n = n / 5;
 		power++;
-		powerOf5 = powerOf5 * 5;
 	}
-
-	powerOf5 = powerOf5 / 5;
-	if (n == powerOf5) {
-		return power;
-	}
-	else {
-		return 1;
-	}
+	return power;
 }
 
 int factorialZeroes(int n) {
@@ -46,8 +38,15 @@ int factorialZeroes(int n) {
 	return zeroes;
 }
 
+int factorialZeroesFast(int n) {
+	int zeroes = 0;
+	for (int i = 5; i <= n; i = i * 5) {
+		zeroes += n / i;
+	}
+	return zeroes;
+}
 int main() {
-	for (int i = 0; i < 127; i++) {
-		cout << "factorial " << i << " zeroes " << factorialZeroes(i)<<endl;
+	for (int i = 5; i < 3125; i += 5) {
+		cout << "factorial " << i << " zeroes1 " << factorialZeroes(i) << " zeroes2 " << factorialZeroesFast(i) << endl;
 	}
 }
